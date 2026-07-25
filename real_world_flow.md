@@ -1,0 +1,57 @@
+# DCPI - Real World Flow
+
+- Project Manager logs in to the DCPI platform
+- Creates a new project — enters name, location, MW capacity, budget, deadline, and Tier level
+- System generates a unique Project ID that links everything together
+- Vendors register on the dedicated **Vendor Portal** with company name, email, and password
+- Each vendor gets their own dashboard to track their submissions
+- Vendors submit tenders — price, lead time, and equipment catalog
+- Multiple vendors submit competing tenders for the same project equipment
+- Engineer clicks "Get AI Recommendation" on the Tenders page
+- **Procurement Agent** evaluates all tenders across price, compliance, lead time, and quality
+- AI returns a ranked list with scores and a written justification for the recommended vendor
+- Engineer reviews the recommendation, then accepts or rejects each tender
+- Engineer uploads thousands of pages of project documents (specifications, contracts, design drawings)
+- Alternatively, engineer can simply **forward documents via email** to a project-specific address — system auto-ingests them with zero manual steps
+- System extracts text from every page of the PDF
+- For specifications: runs a two-pass extraction — fast heuristic parsing first, then AI handles only the ambiguous portions
+- All extracted clauses are stored in both a relational database (for fast queries) and a vector database (for AI-powered semantic search)
+- Engineer uploads industry standard PDFs (Uptime Institute, ASHRAE, TIA-942) on the Integrations page
+- System extracts, chunks, and embeds every section into the vector database
+- Now all AI agents can cross-reference against **both project specs AND global industry standards** during their analysis
+- Winning vendor submits their detailed technical data sheets (submittals)
+- **Compliance Agent** reads the vendor's submittal and compares every attribute against the original project specifications
+- If a vendor submits a 450kW generator but the spec requires 500kW — the AI catches it instantly
+- For every deviation found, system calculates: deviation percentage, severity (CRITICAL / MAJOR / MINOR), and a recommended action
+- For serious deviations, AI **auto-generates a full NCR (Non-Conformance Report)** with title, description, severity, due date, assigned person, and justification text with exact spec clause references
+- QA Manager reviews NCRs — sees the exact spec clause, page number, and AI-recommended action
+- Planner uploads or imports the master schedule (500+ construction tasks with predecessor chains)
+- **Schedule Agent** analyzes each task using multiple risk factors: float erosion, predecessor delays, linked NCR severity, procurement delays, and historical data
+- Calculates a risk score and delay probability for each task
+- Identifies the critical path (zero-float tasks that directly control the project end date)
+- AI generates human-readable mitigation plans for high-risk tasks
+- PM reviews the risk dashboard with interactive timeline visualization
+- System tracks live shipments with GPS coordinates — origin, destination, current location, carrier, and estimated vs. required arrival dates
+- Supply Chain page shows a **live map** with all active shipments and their status
+- **Supply Chain Agent** detects when a shipment is at risk (estimated arrival later than required delivery)
+- AI generates **alternative logistics strategies** — e.g., "Switch to air freight for +$15,000 to save 4 days"
+- System displays real-time weather alerts and port congestion warnings affecting shipments
+- Shipping delays are **directly linked to the project schedule** so PM can see downstream impact
+- Field engineer on-site finds a conflict in the drawings and types a question in the **RFI Chat** interface
+- **Orchestrator Agent** receives the query, classifies the intent, and routes it to the correct specialist agent
+- **Knowledge Agent** searches the entire project knowledge base for the most relevant specification clauses
+- Also searches past resolved RFIs for precedent answers
+- AI generates a structured answer with: the direct answer, source citations (document, clause number, page reference, relevance score), and links to similar past RFIs
+- Field engineer gets an **instant answer with traceable citations** — no more 2-4 week wait for the design consultant
+- Equipment arrives on-site and needs to pass commissioning testing (visual inspection, component testing, integrated system testing)
+- **Commissioning Agent** uses the original specs and vendor submittals to dynamically generate **equipment-specific testing checklists** with exact acceptance criteria (e.g., "UPS efficiency at 75% load must be ≥ 96.0%")
+- Field testers input actual test results for each step
+- AI validates results against acceptance criteria in real-time — marks each step as pass or fail
+- If a test fails, system **automatically creates a new NCR** and links it back to the specific commissioning record
+- Design engineer uploads a 2D floor plan image
+- AI detects walls, server racks, PDUs, and HVAC units from the 2D image
+- Engineer views the data centre layout in an **interactive 3D viewer** directly in the browser — can rotate, zoom, and inspect rack placements
+- Project Director opens the Dashboard — instantly sees: open NCRs by severity, documents processed, compliance checks run, at-risk tasks, critical path tasks, open RFIs, and recent AI activity
+- Dashboard shows **quantified impact metrics**: manual hours saved per week, compliance accuracy %, average days risks flagged in advance, commissioning pass rate
+- Shows an overall **Project Health Score** (0-100)
+- **Report Agent** compiles data across all agents into a formatted executive summary
