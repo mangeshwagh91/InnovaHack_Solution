@@ -1,0 +1,392 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base ─────────────────────────────────────────────────────────────────── */
+@layer base {
+  :root {
+    --bg-primary: #1a1a1a;
+    --bg-surface: #222222;
+    --bg-elevated: #2a2a2a;
+    --text-primary: #f0ece4;
+    --text-secondary: #8a847b;
+    --text-muted: #6a645c;
+    --border-color: #333330;
+    
+    --primary-brand: #b08d6e;
+    --primary-hover: #8c6f55;
+    --primary-dark: #6b5340;
+    --success-text: #b08d6e;
+    
+    --warning: #c9a052;
+    --error-bg: #2a2220;
+    --error-text: #c4655a;
+    
+    --accent-blue-bg: #2a2520;
+    --accent-blue-text: #b08d6e;
+    
+    --glass-bg: rgba(26, 26, 26, 0.88);
+    --glass-border: #333330;
+  }
+
+  html {
+    font-size: 97% !important; /* Reduced by 10% from previous 108% */
+    background-color: var(--bg-primary);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+/* ─── Components ───────────────────────────────────────────────────────────── */
+@layer components {
+  .card {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+    @apply rounded-xl border;
+    box-shadow: none !important; /* Flat UI finish */
+  }
+
+  .card-hover {
+    @apply transition-all duration-200;
+  }
+  .card-hover:hover {
+    transform: translateY(-1px);
+    border-color: #4a4640;
+  }
+
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+  }
+
+  .glass-panel {
+    @apply glass rounded-xl;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+
+  .btn-primary {
+    @apply font-bold px-4 py-2.5 rounded-lg text-sm text-white;
+    background: var(--primary-brand);
+    transition: all 0.2s ease;
+    border: 1px solid rgba(176,141,110,0.4);
+    box-shadow: none !important;
+  }
+  .btn-primary:hover {
+    background: var(--primary-hover);
+  }
+  .btn-primary:active { transform: scale(0.97); }
+
+  .btn-secondary {
+    @apply font-bold px-4 py-2.5 rounded-lg text-sm bg-neutral-900 text-neutral-200 border border-neutral-800;
+    transition: all 0.2s ease;
+    box-shadow: none !important;
+  }
+  .btn-secondary:hover {
+    background: #1a1a1a;
+    border-color: #4a4640;
+  }
+  .btn-secondary:active { transform: scale(0.97); }
+
+  .blueprint-grid {
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.015) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.015) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+
+  .page-wrapper {
+    @apply max-w-6xl mx-auto space-y-8;
+  }
+
+  /* Skeleton shimmer */
+  .skeleton {
+    background: linear-gradient(90deg, #222222 25%, #2a2a2a 50%, #222222 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.8s infinite;
+    border-radius: 8px;
+  }
+
+
+}
+
+/* ─── Keyframes ────────────────────────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes shimmer-sweep {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+.animate-shimmer { animation: shimmer-sweep 1.2s ease-in-out; }
+
+@keyframes pulse-glow {
+  0%,100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+  50%      { box-shadow: 0 0 0 6px rgba(176,141,110,0.12); }
+}
+.animate-pulse-glow { animation: pulse-glow 2.5s ease-in-out infinite; }
+
+@media print {
+  nav, .no-print { display: none !important; }
+}
+
+/* ─── Tailwind Utilities Overrides (Force Premium Dark Mode Mockup) ─── */
+body, html {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Backgrounds */
+.bg-white, .bg-card, .bg-surface {
+  background-color: var(--bg-surface) !important;
+}
+
+/* Landing page exception: white buttons must stay white */
+.landing-btn-white {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+.landing-btn-white:hover {
+  background-color: #e4e4e7 !important;
+}
+.bg-slate-50, .bg-slate-100, .bg-gray-50, .bg-gray-100, .bg-neutral-50, .bg-slate-900\/50, .bg-slate-50\/50 {
+  background-color: var(--bg-primary) !important;
+}
+.bg-slate-900, .bg-neutral-900, .bg-black {
+  background-color: var(--bg-primary) !important;
+}
+
+/* Translucent active states */
+.bg-emerald-50, .bg-emerald-50\/50 {
+  background-color: var(--primary-dark) !important;
+}
+
+/* Precise Sidebar Active Tab Override */
+aside.bg-white {
+  background-color: var(--bg-primary) !important;
+}
+aside a.bg-emerald-50, aside a.bg-emerald-50.text-emerald-700 {
+  background-color: var(--bg-elevated) !important;
+  color: var(--text-primary) !important;
+  border-right: none !important;
+}
+aside a.bg-emerald-50.text-emerald-700 span:not(.transition-colors) {
+  color: var(--text-primary) !important;
+}
+aside a.bg-emerald-50 span.transition-colors {
+  color: var(--primary-brand) !important;
+}
+
+/* Borders */
+.border-slate-100, .border-slate-200, .border-slate-300, 
+.border-gray-100, .border-gray-200, .border-gray-300,
+.border-neutral-100, .border-neutral-200, .border-neutral-800 {
+  border-color: var(--border-color) !important;
+}
+
+/* Texts */
+.text-slate-900, .text-slate-800, .text-gray-900, .text-gray-800, .text-neutral-900 {
+  color: var(--text-primary) !important;
+}
+.text-slate-700, .text-slate-600, .text-gray-700, .text-gray-600, .text-neutral-700 {
+  color: var(--text-secondary) !important;
+}
+.text-slate-500, .text-slate-400, .text-gray-500, .text-gray-400, .text-neutral-500 {
+  color: var(--text-muted) !important;
+}
+.text-emerald-700, .text-emerald-600, .text-emerald-500 {
+  color: var(--primary-brand) !important;
+}
+
+/* Header blur overrides */
+.bg-white\/90 {
+  background-color: rgba(26, 26, 26, 0.92) !important;
+}
+
+/* Hover effects */
+.hover\:bg-slate-50:hover, .hover\:bg-slate-100:hover, .hover\:bg-gray-50:hover {
+  background-color: var(--bg-elevated) !important;
+}
+.hover\:text-slate-900:hover, .hover\:text-slate-800:hover, .hover\:text-gray-900:hover {
+  color: var(--text-primary) !important;
+}
+
+/* inputs & Forms */
+input, select, textarea {
+  background-color: var(--bg-primary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+input::placeholder, textarea::placeholder {
+  color: #4a4640 !important;
+}
+
+/* ─── Translucent Dark Mode Overrides (Prevents Solid Grey Panels) ─── */
+.bg-white\/90 {
+  background-color: rgba(26, 26, 26, 0.92) !important;
+}
+.bg-white\/80 {
+  background-color: rgba(26, 26, 26, 0.85) !important;
+}
+.bg-white\/70 {
+  background-color: rgba(26, 26, 26, 0.75) !important;
+}
+.bg-white\/60 {
+  background-color: rgba(26, 26, 26, 0.65) !important;
+}
+.bg-white\/50 {
+  background-color: rgba(26, 26, 26, 0.55) !important;
+}
+.bg-white\/40 {
+  background-color: rgba(26, 26, 26, 0.45) !important;
+}
+.bg-white\/30 {
+  background-color: rgba(26, 26, 26, 0.35) !important;
+}
+.bg-white\/20 {
+  background-color: rgba(26, 26, 26, 0.25) !important;
+}
+.bg-white\/10 {
+  background-color: rgba(26, 26, 26, 0.15) !important;
+}
+.bg-white\/5 {
+  background-color: rgba(26, 26, 26, 0.08) !important;
+}
+
+/* Translucent Borders Override */
+.border-white\/60, .border-white\/50, .border-white\/40, .border-white\/30, .border-white\/20, .border-white\/10, .border-slate-200\/60 {
+  border-color: var(--border-color) !important;
+}
+
+/* Hover Overrides for Translucent Panels */
+.hover\:bg-white:hover, .hover\:bg-white\/80:hover {
+  background-color: #2a2a2a !important;
+}
+.hover\:bg-slate-100\/80:hover {
+  background-color: #252520 !important;
+}
+
+/* Translucent Blue & Info Overrides */
+.bg-blue-50, .bg-blue-50\/80, .bg-sky-50, .bg-sky-50\/80 {
+  background-color: var(--accent-blue-bg) !important;
+}
+.text-blue-700, .text-blue-600, .text-blue-650, .text-sky-700, .text-sky-600, .text-blue-500 {
+  color: var(--accent-blue-text) !important;
+}
+.border-blue-200, .border-sky-200 {
+  border-color: var(--accent-blue-bg) !important;
+}
+
+/* Translucent Red & Error/NCR Overrides */
+.bg-red-50, .bg-red-50\/80, .bg-red-50\/30 {
+  background-color: var(--error-bg) !important;
+}
+.text-red-700, .text-red-650, .text-red-600, .text-red-655, .text-red-500 {
+  color: var(--error-text) !important;
+}
+.border-red-200 {
+  border-color: var(--error-text) !important;
+}
+.bg-red-500 {
+  background-color: var(--error-text) !important;
+}
+
+/* Translucent Teal/Emerald Overrides */
+.bg-teal-50, .bg-teal-50\/80, .bg-teal-50\/30 {
+  background-color: rgba(176,141,110,0.1) !important;
+}
+.text-teal-700, .text-teal-600 {
+  color: var(--primary-brand) !important;
+}
+.border-teal-200 {
+  border-color: rgba(176,141,110,0.2) !important;
+}
+
+/* Glowing Icon Gradients Overrides */
+.from-indigo-100, .to-purple-100, .from-indigo-500\/10, .to-purple-600\/10 {
+  background: rgba(16, 185, 129, 0.15) !important;
+}
+
+/* Scrollbars & custom components override */
+::-webkit-scrollbar-thumb,
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--primary-brand) !important;
+}
+
+/* ─── Global Color Palette Mapping (Enforce Emerald & Copper Theme) ─── */
+
+/* 1. Primary Emerald Backgrounds & Gradients */
+.bg-indigo-600, .bg-indigo-500, .bg-sky-600, .bg-sky-500, .bg-teal-500, .bg-teal-600, .bg-violet-600, .bg-violet-500, 
+.from-indigo-500, .to-purple-600, .from-emerald-500, .to-teal-600, .from-sky-500\/10, .to-indigo-500\/10, .bg-emerald-500 {
+  background: var(--primary-brand) !important;
+  background-image: none !important;
+}
+.bg-indigo-600:hover, .bg-indigo-500:hover, .bg-sky-600:hover, .bg-sky-500:hover, .bg-teal-500:hover, .bg-teal-600:hover, .bg-violet-600:hover, .bg-violet-500:hover, .hover\:bg-emerald-600:hover {
+  background: var(--primary-hover) !important;
+  background-image: none !important;
+}
+
+/* 2. Primary Emerald Texts */
+.text-indigo-600, .text-indigo-700, .text-sky-600, .text-sky-700, .text-teal-600, .text-teal-700, .text-violet-600, .text-violet-700, .text-indigo-500, .text-sky-500 {
+  color: var(--primary-brand) !important;
+}
+
+/* 3. Translucent Emerald Backgrounds */
+.bg-indigo-50, .bg-sky-50, .bg-teal-50, .bg-violet-50, .bg-indigo-500\/10, .bg-indigo-600\/10, .bg-sky-500\/10, .bg-teal-500\/10, .bg-indigo-50\/80, .bg-sky-50\/80 {
+  background-color: rgba(176,141,110,0.1) !important;
+}
+
+/* 4. Translucent Emerald Borders */
+.border-indigo-100, .border-indigo-200, .border-sky-100, .border-sky-200, .border-teal-100, .border-teal-200 {
+  border-color: rgba(176,141,110,0.2) !important;
+}
+
+/* 5. Warning / Accent Copper & Gold Mapping */
+.bg-amber-500, .bg-amber-600, .bg-warning {
+  background-color: var(--warning) !important;
+}
+.text-amber-600, .text-amber-700, .text-amber-500, .text-warning {
+  color: var(--warning) !important;
+}
+.bg-amber-50, .bg-amber-50\/80, .bg-amber-500\/10 {
+  background-color: rgba(242, 175, 72, 0.1) !important;
+}
+.border-amber-200, .border-amber-500\/20 {
+  border-color: rgba(242, 175, 72, 0.2) !important;
+}
+
+/* 6. High-End UI Shadow Adjustments */
+.shadow-emerald-500\/20, .shadow-emerald-500\/10, .shadow-indigo-500\/20, .shadow-indigo-500\/10, .shadow-indigo-600\/20 {
+  box-shadow: none !important;
+}
+
+/* Custom Scrollbar (Global) */
+::-webkit-scrollbar,
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track,
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb,
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--primary-brand);
+  border-radius: 20px;
+}
+::-webkit-scrollbar-thumb:hover,
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: var(--primary-hover);
+}
