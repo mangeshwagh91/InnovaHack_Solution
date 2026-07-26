@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.env
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+.pytest_cache/
+server/dcpi.db
+server/chroma_db/
+server/uploads/
